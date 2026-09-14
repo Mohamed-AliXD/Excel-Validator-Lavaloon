@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Excel Sheet Validator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Excel Sheet Validator</h1>
+    <p>Upload an Excel (.xlsx) file with columns: name, email, age.</p>
+    <p>Each row will be checked, and only valid rows will be saved to the database.</p>
+
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <ul class="flash-messages">
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+        {% endif %}
+    {% endwith %}
+
+    <form method="POST" action="{{ url_for('upload') }}" enctype="multipart/form-data">
+        <input type="file" name="excel_file">
+        <button type="submit">Upload</button>
+    </form>
+
+</body>
+</html>

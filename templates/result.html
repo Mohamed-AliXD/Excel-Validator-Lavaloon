@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Upload Result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+    <h1>Upload Result</h1>
+
+    <p class="success-count">{{ inserted_count }} row(s) inserted successfully.</p>
+
+    {% if rejected_rows %}
+        <h2>Rejected Rows</h2>
+        <table>
+            <tr>
+                <th>Excel Row</th>
+                <th>Reason</th>
+            </tr>
+            {% for row_number, reason in rejected_rows %}
+            <tr>
+                <td>{{ row_number }}</td>
+                <td>{{ reason }}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    {% else %}
+        <p>No rows were rejected.</p>
+    {% endif %}
+
+    <a href="{{ url_for('index') }}">Upload another file</a>
+
+</body>
+</html>
